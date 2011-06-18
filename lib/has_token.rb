@@ -1,5 +1,6 @@
 require 'digest/sha1'
 require 'has_token/concern'
+require 'has_token/table_definition'
 
 module HasToken
 
