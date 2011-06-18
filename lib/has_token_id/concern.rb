@@ -1,4 +1,4 @@
-module HasToken
+module HasTokenId
   module Concern
   
     extend ActiveSupport::Concern
@@ -9,15 +9,15 @@ module HasToken
     end
 
     module ClassMethods
-      attr_accessor :has_token_options
+      attr_accessor :has_token_id_options
       
       # just an overwrite point so you can assign different defaults to different models
       def default_token_options
-        HasToken.default_token_options
+        HasTokenId.default_token_options
       end
       
       def generate_unique_token
-        record, options = true, self.has_token_options
+        record, options = true, self.has_token_id_options
         conditions = {}
         options[:prefix] ||= self.to_s[0]
         len = options[:length].to_i - options[:prefix].length
@@ -30,7 +30,7 @@ module HasToken
       end
       
       def find(*args)
-        if args[0].length == has_token_options[:length] && args[0][0] == has_token_options[:prefix]
+        if args[0].length == has_token_id_options[:length] && args[0][0] == has_token_id_options[:prefix]
           record = find_by_token(args[0]) rescue nil
         end
         record || __find__(*args)
@@ -41,7 +41,7 @@ module HasToken
     module InstanceMethods
   
       def to_param 
-        self.send(self.class.has_token_options[:param_name])
+        self.send(self.class.has_token_id_options[:param_name])
       end
     
       private      
@@ -54,4 +54,4 @@ module HasToken
 
   end # Concern
   
-end # HasToken
+end # HasTokenId

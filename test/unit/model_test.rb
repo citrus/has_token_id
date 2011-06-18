@@ -1,17 +1,16 @@
 require_relative '../test_helper'
 
-
 # We'll test the test/dummy/app/item.rb model
 
 class ModelTest < Test::Unit::TestCase
   
   def setup
     Item.destroy_all
-    Item.has_token_options = HasToken.default_token_options
+    Item.has_token_id_options = HasTokenId.default_token_options
   end
   
-  should "respond to has_token" do
-    assert Item.respond_to?(:has_token)
+  should "respond to has_token_id" do
+    assert Item.respond_to?(:has_token_id)
   end
   
   should "set it's token" do  
@@ -43,11 +42,11 @@ class ModelTest < Test::Unit::TestCase
     
     should "have default options" do
       opts = {:prefix => "I", :length => 16, :param_name => "token"}
-      assert_equal opts, Item.has_token_options
+      assert_equal opts, Item.has_token_id_options
     end
     
     should "have proper token length" do
-      assert_equal Item.has_token_options[:length], @item.token.length
+      assert_equal Item.has_token_id_options[:length], @item.token.length
     end
     
     should "have token as to_param" do
@@ -63,7 +62,7 @@ class ModelTest < Test::Unit::TestCase
   context "with a long token" do
      
      setup do
-       Item.has_token_options[:length] = 40
+       Item.has_token_id_options[:length] = 40
        @item = Item.create(:name => "Bacon Cheese Burger")
      end
      
@@ -76,7 +75,7 @@ class ModelTest < Test::Unit::TestCase
   context "with long prefix" do
   
      setup do
-       Item.has_token_options.update(:prefix => "item-", :length => 40)
+       Item.has_token_id_options.update(:prefix => "item-", :length => 40)
        @item = Item.create(:name => "Bacon Cheese Burger")
      end
   

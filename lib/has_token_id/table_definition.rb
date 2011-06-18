@@ -1,6 +1,6 @@
 require 'active_record/connection_adapters/abstract/schema_definitions'
 
-module HasToken
+module HasTokenId
   module TableDefinition
     
     def token(*args)
@@ -11,4 +11,4 @@ module HasToken
   end
 end
 
-ActiveRecord::ConnectionAdapters::TableDefinition.send(:include, HasToken::TableDefinition)
+ActiveRecord::ConnectionAdapters::TableDefinition.send(:include, HasTokenId::TableDefinition)

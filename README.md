@@ -9,7 +9,7 @@ Useage
 
     class Item < ActiveRecord::Base
     
-      has_token
+      has_token_id
       
     end
 

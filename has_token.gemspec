@@ -1,18 +1,18 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "has_token/version"
+require "has_token_id/version"
 
 Gem::Specification.new do |s|
-  s.name        = "has_token"
-  s.version     = HasToken::VERSION
+  s.name        = "has_token_id"
+  s.version     = HasTokenId::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Spencer Steffen"]
   s.email       = ["spencer@citrusme.com"]
-  s.homepage    = "https://github.com/citrus/has_token"
-  s.summary     = %q{Adds a random token to your rails model}
-  #s.description = %q{TODO: Write a gem description}
+  s.homepage    = "https://github.com/citrus/has_token_id"
+  s.summary     = %q{Identifies your active records with a random token.}
+  s.description = %q{A very simple way to identify your active records with a random token.}
 
-  s.rubyforge_project = "has_token"
+  s.rubyforge_project = "has_token_id"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features,lib/dummy_hooks}/*`.split("\n")
@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('shoulda',        '>= 2.11.3')
   s.add_development_dependency('dummier',        '>= 0.1.1')
   s.add_development_dependency('sqlite3',        '>= 1.3.3')
-  s.add_development_dependency('spork',          '>= 0.9.0.rc8')
-  s.add_development_dependency('spork-testunit', '>= 0.0.5')
+  # s.add_development_dependency('spork',          '>= 0.9.0.rc8')
+  # s.add_development_dependency('spork-testunit', '>= 0.0.5')
    
 end

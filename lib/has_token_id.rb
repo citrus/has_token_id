@@ -1,8 +1,8 @@
 require 'digest/sha1'
-require 'has_token/concern'
-require 'has_token/table_definition'
+require 'has_token_id/concern'
+require 'has_token_id/table_definition'
 
-module HasToken
+module HasTokenId
 
   def self.included(base)
     
@@ -10,9 +10,9 @@ module HasToken
     
     base.instance_eval do
       
-      def has_token(options={})
-        self.send(:include, HasToken::Concern)
-        self.has_token_options = self.default_token_options.merge(options)
+      def has_token_id(options={})
+        self.send(:include, HasTokenId::Concern)
+        self.has_token_id_options = self.default_token_options.merge(options)
       end
             
     end
@@ -29,4 +29,4 @@ module HasToken
   
 end # Has Token
 
-ActiveRecord::Base.send(:include, HasToken) # unless ActiveRecord::Base.methods.include?(:has_token)
+ActiveRecord::Base.send(:include, HasTokenId) # unless ActiveRecord::Base.methods.include?(:has_token_id)
