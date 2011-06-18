@@ -41,7 +41,7 @@ class ModelTest < Test::Unit::TestCase
     end
     
     should "have default options" do
-      opts = {:prefix => "I", :length => 16, :param_name => "token"}
+      opts = { :prefix => "I", :length => 24, :param_name => "token" }
       assert_equal opts, Item.has_token_id_options
     end
     

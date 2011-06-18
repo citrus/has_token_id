@@ -4,8 +4,8 @@ module HasTokenId
   module TableDefinition
     
     def token(*args)
-      options = args.extract_options!
-      column(:token, :string, options)
+      options = { :length => 24 }.merge(args.extract_options!)
+      column(:token, :string, options.merge(:nil => false))
     end
   
   end
