@@ -7,6 +7,7 @@ class ModelTest < Test::Unit::TestCase
   
   def setup
     Item.destroy_all
+    Item.has_token_options = HasToken.default_token_options
   end
   
   should "respond to has_token" do
@@ -36,9 +37,53 @@ class ModelTest < Test::Unit::TestCase
       @item = Item.create(:name => "Blue Cheese Burger")
     end
     
+    should "assume token prefix" do
+      assert_equal "I", @item.token[0]
+    end
+    
+    should "have default options" do
+      opts = {:prefix => "I", :length => 16, :param_name => "token"}
+      assert_equal opts, Item.has_token_options
+    end
+    
+    should "have proper token length" do
+      assert_equal Item.has_token_options[:length], @item.token.length
+    end
+    
+    should "have token as to_param" do
+      assert_equal @item.to_param, @item.token
+    end
+    
     should "find by token" do
       assert_equal @item, Item.find(@item.token)
     end
+    
+  end
+
+  context "with a long token" do
+     
+     setup do
+       Item.has_token_options[:length] = 40
+       @item = Item.create(:name => "Bacon Cheese Burger")
+     end
+     
+     should "have long token" do
+       assert_equal 40, @item.token.length
+     end
+    
+  end
+  
+  context "with long prefix" do
+  
+     setup do
+       Item.has_token_options.update(:prefix => "item-", :length => 40)
+       @item = Item.create(:name => "Bacon Cheese Burger")
+     end
+  
+     should "account for longer prefixes" do    
+       assert_equal 40, @item.token.length
+       assert_match /^item-(.*)/, @item.token
+     end
     
   end
         

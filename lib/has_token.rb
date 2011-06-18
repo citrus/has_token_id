@@ -12,11 +12,18 @@ module HasToken
       def has_token(options={})
         self.send(:include, HasToken::Concern)
         self.has_token_options = self.default_token_options.merge(options)
-        self.has_token_options[:prefix] ||= self.class.to_s[0].upcase
       end
             
     end
         
+  end
+  
+  def self.default_token_options
+    {
+      :prefix     => nil, # if nil use first letter of class name 
+      :length     => 16,
+      :param_name => 'token'
+    }
   end
   
 end # Has Token

@@ -11,28 +11,23 @@ module HasToken
     module ClassMethods
       attr_accessor :has_token_options
       
+      # just an overwrite point so you can assign different defaults to different models
       def default_token_options
-        {
-          :prefix     => nil, # if nil use first letter of class name 
-          :length     => 16,
-          :param_name => 'token'
-        }
+        HasToken.default_token_options
       end
       
       def generate_unique_token
         record, options = true, self.has_token_options
         conditions = {}
+        options[:prefix] ||= self.to_s[0]
+        len = options[:length].to_i - options[:prefix].length
         while record
-          token = [options[:prefix], Digest::SHA1.hexdigest((Time.now.to_i * rand()).to_s)[1...options[:length].to_i]].join
+          token = [options[:prefix], Digest::SHA1.hexdigest((Time.now.to_i * rand()).to_s)[1..len]].join
           conditions[options[:param_name].to_sym] = token
           record = self.where(conditions).first
         end
         token
       end
-      
-      def is_token?(arg)
-        arg.to_s.match(/[A-Z]{1}[0-9]+/) != nil
-      end    
       
       def find(*args)
         if args[0].length == has_token_options[:length] && args[0][0] == has_token_options[:prefix]
