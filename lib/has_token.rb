@@ -1,0 +1,3 @@
+module HasToken
+  # Your code goes here...
+end
