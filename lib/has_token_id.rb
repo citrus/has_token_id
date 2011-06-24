@@ -6,15 +6,13 @@ module HasTokenId
 
   def self.included(base)
     
-    ActiveRecord::FinderMethods.send(:alias_method, :__find__, :find)
-    
     base.instance_eval do
-      
+            
       def has_token_id(options={})
         self.send(:include, HasTokenId::Concern)
         self.has_token_id_options = self.default_token_options.merge(options)
       end
-            
+                  
     end
         
   end
@@ -29,4 +27,4 @@ module HasTokenId
   
 end # Has Token
 
-ActiveRecord::Base.send(:include, HasTokenId) # unless ActiveRecord::Base.methods.include?(:has_token_id)
+ActiveRecord::Base.send(:include, HasTokenId)
