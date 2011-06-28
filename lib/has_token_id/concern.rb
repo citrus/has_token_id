@@ -31,7 +31,7 @@ module HasTokenId
       
       # Find by token if the first param looks like a token, otherwise use super 
       def find(*args)
-        if args[0].length == has_token_id_options[:length] && args[0][0] == has_token_id_options[:prefix]
+        if args[0].is_a?(String) && args[0].length == has_token_id_options[:length] && args[0][0] == has_token_id_options[:prefix]
           record = find_by_token(args[0]) rescue nil
         end
         record || super(*args)
