@@ -1,11 +1,14 @@
-Has Token
-=========
+Has Token Id
+============
 
-Yep.. it has token alright.
+Yep.. it has token id alright.
 
 
-Useage
-------
+This gem isn't ready for you yet.
+
+
+Usage
+-----
 
     class Item < ActiveRecord::Base
     
