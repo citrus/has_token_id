@@ -20,9 +20,8 @@ module HasTokenId
       def generate_unique_token
         record, options = true, self.has_token_id_options
         conditions = {}
-        len = options[:length].to_i - options[:prefix].length
         while record
-          token = [options[:prefix], Digest::SHA1.hexdigest((Time.now.to_i * rand()).to_s)[1..len]].compact.join
+          token = [ options[:prefix], Digest::SHA1.hexdigest((Time.now.to_i * rand()).to_s)].compact.join[0...options[:length].to_i]
           conditions[options[:param_name].to_sym] = token
           record = self.where(conditions).first
         end
@@ -31,7 +30,7 @@ module HasTokenId
       
       # Find by token if the first param looks like a token, otherwise use super 
       def find(*args)
-        if args[0].is_a?(String) && args[0].length == has_token_id_options[:length] && args[0][0] == has_token_id_options[:prefix]
+        if args[0].is_a?(String) && args[0].length == has_token_id_options[:length]
           record = find_by_token(args[0]) rescue nil
         end
         record || super(*args)

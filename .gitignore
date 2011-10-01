@@ -2,6 +2,6 @@
 .bundle
 .DS_Store
 Gemfile.lock
-lib/dummy_hooks/after_migrate.rb
 pkg/*
+test/dummy_hooks/after_migrate.rb
 test/dummy

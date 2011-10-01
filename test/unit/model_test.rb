@@ -6,7 +6,8 @@ class ModelTest < Test::Unit::TestCase
   
   def setup
     Item.destroy_all
-    Item.has_token_id_options = HasTokenId.default_token_options
+    # reset to defaults
+    Item.has_token_id_options.merge!(Item.default_token_options)
   end
   
   should "respond to has_token_id" do
