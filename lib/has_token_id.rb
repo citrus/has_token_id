@@ -18,7 +18,7 @@ module HasTokenId
   end
   
   def self.default_token_options
-    {
+    @default_token_options ||= {
       :prefix         => nil, # if nil use first letter of class name 
       :length         => 24,
       :param_name     => 'token',

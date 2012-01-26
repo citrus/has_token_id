@@ -1,18 +1,22 @@
 Has Token Id
 ============
 
-### Identify your active records with random tokens.
-
-When you don't want your users to see a sequential ID on your records, use has_token_id!
+Identify your active records with random tokens when you don't want your users to see a sequential ID on your records.
 
 
 ------------------------------------------------------------------------------
 Usage
 ------------------------------------------------------------------------------
 
-First, add a token to your record with a migration:
+First, add a token to your model's table with a migration:
 
 ```ruby
+# Upgrade and existing table
+class AddTokenToItems < ActiveRecord::Migration
+  add_column :items, :token, :string
+end
+
+# Add to a new table
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
@@ -26,7 +30,7 @@ end
 ```
 
 
-Now make sure your class knows to use it's token by calling `has_token_id`
+Now make sure your model knows to use it's token by calling `has_token_id`
 
 ```ruby
 class Item < ActiveRecord::Base
@@ -82,11 +86,7 @@ Or options can be set on a class level:
 
 ```ruby
 class Item < ActiveRecord::Base
-  has_token_id
-  has_token_id_options.merge!(
-    :prefix => "OMG",
-    :length => 10
-  )
+  has_token_id :prefix => "OMG", :length => 10
 end
 ```
 

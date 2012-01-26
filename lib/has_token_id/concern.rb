@@ -13,7 +13,7 @@ module HasTokenId
       
       # Default options as well as an overwrite point so you can assign different defaults to different models
       def default_token_options
-        @default_token_options ||= HasTokenId.default_token_options.merge(:prefix => self.to_s[0])
+        @default_token_options ||= { :prefix => self.to_s[0] }.merge(HasTokenId.default_token_options)
       end
       
       # Generates a unique token based on the options
