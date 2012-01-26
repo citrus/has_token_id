@@ -1,10 +1,10 @@
-require_relative '../test_helper'
+require "test_helper"
 
 # We'll test the test/dummy/app/item.rb model
 
-class ModelTest < Test::Unit::TestCase
+class ModelTest < MiniTest::Should::TestCase
   
-  def setup
+  setup do
     Item.destroy_all
     # reset to defaults
     Item.has_token_id_options.merge!(Item.default_token_options)
@@ -17,7 +17,7 @@ class ModelTest < Test::Unit::TestCase
   should "set it's token" do  
     @item = Item.new(:name => "Something")
     assert @item.valid?
-    assert_not_nil @item.token
+    assert !@item.token.nil?
     assert @item.save
   end
   
@@ -25,7 +25,7 @@ class ModelTest < Test::Unit::TestCase
     @item = Item.new(:name => "Something")
     assert @item.valid?
     token = @item.token
-    assert_not_nil token
+    assert !token.nil?
     @item.name = "Something else"
     assert @item.valid?
     assert_equal token, @item.token

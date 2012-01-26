@@ -1,6 +1,6 @@
-require_relative '../test_helper'
+require "test_helper"
 
-class HasTokenIdIdTest < Test::Unit::TestCase
+class HasTokenIdIdTest < MiniTest::Should::TestCase
   
   should "include HasTokenId" do
     assert ActiveRecord::Base.included_modules.include?(HasTokenId)
