@@ -2,9 +2,10 @@ require "test_helper"
 
 # We'll test the test/dummy/app/item.rb model
 
-class ModelTest < MiniTest::Should::TestCase
+class ConcernTest < MiniTest::Should::TestCase
   
   setup do
+    # remove all items
     Item.destroy_all
     # reset to defaults
     Item.has_token_id_options.merge!(Item.default_token_options)
@@ -42,7 +43,7 @@ class ModelTest < MiniTest::Should::TestCase
     end
     
     should "have default options" do
-      opts = { :prefix => "I", :length => 24, :param_name => "token" }
+      opts = { :prefix => "I", :length => 24, :param_name => "token", :case_sensitive => false }
       assert_equal opts, Item.has_token_id_options
     end
     
@@ -54,8 +55,48 @@ class ModelTest < MiniTest::Should::TestCase
       assert_equal @item.to_param, @item.token
     end
     
-    should "find by token" do
-      assert_equal @item, Item.find(@item.token)
+    context "when case sensitivity is disabled" do
+    
+      setup do
+        Item.has_token_id_options[:case_sensitive] = false
+      end
+    
+      should "find by token" do
+        assert_equal @item, Item.find(@item.token)
+      end    
+      
+      should "find by token even if it's all uppercase" do
+        assert_equal @item, Item.find(@item.token.upcase)
+      end
+      
+      should "find by token even if it's all lowercase" do
+        assert_equal @item, Item.find(@item.token.downcase)
+      end
+      
+    end
+    
+    context "when case sensitivity is enabled" do
+    
+      setup do
+        Item.has_token_id_options[:case_sensitive] = true
+      end
+    
+      should "find by token" do
+        assert_equal @item, Item.find(@item.token)
+      end    
+      
+      should "not find by token if it's all uppercase" do
+        assert_raises ActiveRecord::RecordNotFound do
+          Item.find(@item.token.upcase)
+        end
+      end
+      
+      should "find by token even if it's all lowercase" do
+        assert_raises ActiveRecord::RecordNotFound do
+          assert Item.find(@item.token.downcase)
+        end
+      end
+      
     end
     
   end

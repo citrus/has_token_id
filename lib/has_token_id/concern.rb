@@ -28,10 +28,25 @@ module HasTokenId
         token
       end
       
+      # Find by token ensuring case sensitivity
+      def find_by_case_sensitive_token(token)
+        where("#{has_token_id_options[:param_name]} = ?", token).first
+      end
+      
+      # Find by token regardless of case
+      def find_by_case_insensitive_token(token)
+        where("lower(#{has_token_id_options[:param_name]}) = ?", token.downcase).first
+      end
+      
+      # Find by token
+      def find_by_token(token)
+        send(has_token_id_options[:case_sensitive] ? :find_by_case_sensitive_token : :find_by_case_insensitive_token, token)
+      end
+      
       # Find by token if the first param looks like a token, otherwise use super 
       def find(*args)
         if args[0].is_a?(String) && args[0].length == has_token_id_options[:length]
-          record = find_by_token(args[0]) rescue nil
+          record = find_by_token(args[0])
         end
         record || super(*args)
       end
