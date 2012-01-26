@@ -1,7 +1,6 @@
-Has Token Id
-============
+# HasTokenId [![Build Status](https://secure.travis-ci.org/citrus/has_token_id.png)](http://travis-ci.org/citrus/has_token_id) [![Dependency Status](https://gemnasium.com/citrus/has_token_id.png)](https://gemnasium.com/citrus/has_token_id)
 
-Identify your active records with random tokens when you don't want your users to see a sequential ID on your records.
+Identify your active records with random tokens when you don't want your users to see a sequential ID.
 
 
 ------------------------------------------------------------------------------
