@@ -12,7 +12,13 @@ begin
 rescue LoadError
 end
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+env = File.expand_path("../dummy/config/environment.rb",  __FILE__)
+if File.exists?(env)
+  require env
+else
+  raise LoadError, "Please create the dummy app before running tests. Try running `bundle exec dummier`"
+end
+
 require "rails/test_help"
 require "minitest/autorun"
 require "minitest/should"
