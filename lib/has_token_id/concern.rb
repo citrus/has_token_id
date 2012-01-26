@@ -33,12 +33,12 @@ module HasTokenId
       
       # Find by token ensuring case sensitivity
       def find_by_case_sensitive_token(token)
-        where("#{has_token_id_options[:param_name]} = ?", token).first
+        where("#{token_with_table_name} = ?", token).first
       end
       
       # Find by token regardless of case
       def find_by_case_insensitive_token(token)
-        where("lower(#{has_token_id_options[:param_name]}) = ?", token.downcase).first
+        where("lower(#{token_with_table_name}) = ?", token.downcase).first
       end
       
       # Find by token
@@ -53,7 +53,13 @@ module HasTokenId
         end
         record || super(*args)
       end
-            
+      
+      private
+      
+        def token_with_table_name
+          [ table_name, has_token_id_options[:param_name] ].join(".")
+        end
+      
     end # ClassMethods
     
     module InstanceMethods

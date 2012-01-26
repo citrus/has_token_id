@@ -32,6 +32,10 @@ class ConcernTest < MiniTest::Should::TestCase
     assert_equal token, @item.token
   end
   
+  should "join token with table name when searching for record" do
+    assert_equal "items.token", Item.send(:token_with_table_name)    
+  end
+  
   context "with an existing item" do
     
     setup do
@@ -54,6 +58,10 @@ class ConcernTest < MiniTest::Should::TestCase
     should "have token as to_param" do
       assert_equal @item.to_param, @item.token
     end
+    
+    should "find by token" do
+      assert_equal @item, Item.find(@item.token)
+    end    
     
     context "when case sensitivity is disabled" do
     
