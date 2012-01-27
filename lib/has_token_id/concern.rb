@@ -15,7 +15,7 @@ module HasTokenId
       def default_token_options
         return @default_token_options if @default_token_options
         @default_token_options = HasTokenId.default_token_options
-        @default_token_options[:prefix] ||= self.to_s[0]
+        @default_token_options[:prefix] ||= self.name[0, 1]
         @default_token_options
       end
       

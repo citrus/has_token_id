@@ -11,7 +11,7 @@ class HasTokenIdIdTest < MiniTest::Should::TestCase
   end
   
   should "have has_token_id method" do
-    assert ActiveRecord::Base.methods.include?(:has_token_id)
+    assert ActiveRecord::Base.respond_to?(:has_token_id)
   end
     
 end

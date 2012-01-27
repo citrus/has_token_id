@@ -5,6 +5,9 @@ gsub_file "app/models/item.rb", "end", %(
   
 end)
 
+
+puts destination_path.inspect
+
 migration = Dir.entries(File.join(destination_path, "db/migrate")).last
 
 gsub_file File.join("db/migrate/", migration), "t.string :token", "t.token"

@@ -43,7 +43,7 @@ class ConcernTest < MiniTest::Should::TestCase
     end
     
     should "assume token prefix" do
-      assert_equal "I", @item.token[0]
+      assert_equal "I", @item.token[0, 1]
     end
     
     should "have default options" do
