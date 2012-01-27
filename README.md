@@ -110,6 +110,24 @@ Now just run `bundle install` and you're good to go!
 
 
 ------------------------------------------------------------------------------
+Demo
+------------------------------------------------------------------------------
+
+Try out the demo to get a real clear idea of what has_token_id does.
+
+```bash
+git clone git://github.com/citrus/has_token_id.git
+cd has_token_id
+bundle install
+bundle exec dummier
+cd test/dummy
+rails s
+```
+
+Now open your browser to [http://localhost:3000](http://localhost:3000)
+
+
+------------------------------------------------------------------------------
 Testing
 ------------------------------------------------------------------------------
 
