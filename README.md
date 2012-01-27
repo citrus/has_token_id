@@ -10,7 +10,7 @@ Installation
 Add has_token_id to your Gemfile like so:
 
 ```ruby
-gem 'has_token_id', '~> 0.1.0' 
+gem 'has_token_id', '~> 0.2.0' 
 ```
 
 Now run `bundle install` and you're good to go!
