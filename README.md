@@ -4,6 +4,19 @@ Identify your active records with random tokens when you don't want your users t
 
 
 ------------------------------------------------------------------------------
+Installation
+------------------------------------------------------------------------------
+
+Add has_token_id to your Gemfile like so:
+
+```ruby
+gem 'has_token_id', '~> 0.1.0' 
+```
+
+Now run `bundle install` and you're good to go!
+
+
+------------------------------------------------------------------------------
 Usage
 ------------------------------------------------------------------------------
 
@@ -39,7 +52,7 @@ end
 
 That's basically it! Your Items will now know to use their token as their identifier.
 
-Play with it in your `rails console`
+Try it out in your `rails console`
 
 ```ruby
 @item = Item.create(:name => "Tokenz!")
@@ -73,40 +86,25 @@ Options can be set globally by overwriting the `HasTokenId.default_token_options
 # for one option
 HasTokenId.default_token_options[:prefix] = "OMG"
 
-# for multiple
+# for multiple options
 HasTokenId.default_token_options.merge!(
-  :prefix => "OMG",
-  :length => 8
+  :case_sensitive => true,
+  :length         => 8
 )
 ```
 
 
-Or options can be set on a class level:
+Options can also be set on a per-class level:
 
 ```ruby
+class List < ActiveRecord::Base
+  has_token_id :prefix => "LI", :length => 10
+end
+
 class Item < ActiveRecord::Base
-  has_token_id :prefix => "OMG", :length => 10
+  has_token_id :prefix => "ITM"
 end
 ```
-
-
-------------------------------------------------------------------------------
-Installation
-------------------------------------------------------------------------------
-
-As usual, just use the `gem install` command:
-
-```bash
-(sudo) gem install has_token_id
-```
-    
-Or add has_token_id as a gem in your Gemfile:
-
-```bash
-gem 'has_token_id', '~> 0.1.0' 
-```
-
-Now just run `bundle install` and you're good to go!
 
 
 ------------------------------------------------------------------------------
