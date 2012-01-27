@@ -120,6 +120,7 @@ To get setup, run the following commands:
 ```bash
 git clone git://github.com/citrus/has_token_id.git
 cd has_token_id
+bundle install
 bundle exec dummier
 ```
 
