@@ -89,14 +89,20 @@ class ConcernTest < MiniTest::Should::TestCase
     
       should "find by token" do
         assert_equal @item, Item.find(@item.token)
+        assert_equal @item, Item.find_by_token(@item.token)
+        assert_equal @item, Item.find_by_token!(@item.token)
       end    
       
       should "find by token even if it's all uppercase" do
         assert_equal @item, Item.find(@item.token.upcase)
+        assert_equal @item, Item.find_by_token(@item.token.upcase)
+        assert_equal @item, Item.find_by_token!(@item.token.upcase)
       end
       
       should "find by token even if it's all lowercase" do
         assert_equal @item, Item.find(@item.token.downcase)
+        assert_equal @item, Item.find_by_token(@item.token.downcase)
+        assert_equal @item, Item.find_by_token!(@item.token.downcase)
       end
       
     end
@@ -109,17 +115,27 @@ class ConcernTest < MiniTest::Should::TestCase
     
       should "find by token" do
         assert_equal @item, Item.find(@item.token)
+        assert_equal @item, Item.find_by_token(@item.token)
+        assert_equal @item, Item.find_by_token!(@item.token)
       end    
       
       should "not find by token if it's all uppercase" do
         assert_raises ActiveRecord::RecordNotFound do
           Item.find(@item.token.upcase)
         end
+        assert_equal nil, Item.find_by_token(@item.token.upcase)
+        assert_raises ActiveRecord::RecordNotFound do
+          Item.find_by_token!(@item.token.upcase)
+        end
       end
       
-      should "find by token even if it's all lowercase" do
+      should "not find by token if it's all lowercase" do
         assert_raises ActiveRecord::RecordNotFound do
-          assert Item.find(@item.token.downcase)
+          Item.find(@item.token.downcase)
+        end
+        assert_equal nil, Item.find_by_token(@item.token.downcase)
+        assert_raises ActiveRecord::RecordNotFound do
+          assert Item.find_by_token!(@item.token.downcase)
         end
       end
             

@@ -43,7 +43,14 @@ module HasTokenId
       
       # Find by token
       def find_by_token(token)
-        send(has_token_id_options[:case_sensitive] ? :find_by_case_sensitive_token : :find_by_case_insensitive_token, token)
+        send(has_token_id_options[:case_sensitive] ? :find_by_case_sensitive_token : :find_by_case_insensitive_token, token) rescue nil
+      end
+      
+      # Find by token and raise error if no record is found
+      def find_by_token!(token)
+        record = find_by_token(token)
+        raise ActiveRecord::RecordNotFound, "Could not find #{self.name} with token #{token.inspect}" if record.nil?
+        record
       end
       
       # Find by token if the first param looks like a token, otherwise use super 
