@@ -12,11 +12,15 @@ class TableDefinitionTest < MiniTest::Should::TestCase
   end
   
   should "token definition should be the same as a string column named token" do
-    assert_equal @definition.column(:token, :string), @definition.token
+    capture(:stdout) {
+      assert_equal @definition.column(:token, :string), @definition.token
+    }
   end
   
   should "token definition should include custom options" do
-    assert_equal @definition.column(:token, :string, :length => 8), @definition.token(:length => 8)
+    capture(:stdout) {
+      assert_equal @definition.column(:token, :string, :length => 8), @definition.token(:length => 8)
+    }
   end
   
 end

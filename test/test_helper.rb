@@ -22,5 +22,6 @@ end
 require "rails/test_help"
 require "minitest/autorun"
 require "minitest/should"
+require "support/test_case"
 
 Rails.backtrace_cleaner.remove_silencers!
