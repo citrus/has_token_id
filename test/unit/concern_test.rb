@@ -61,7 +61,25 @@ class ConcernTest < MiniTest::Should::TestCase
     
     should "find by token" do
       assert_equal @item, Item.find(@item.token)
-    end    
+    end
+    
+    should "work with token finder method" do
+      assert Item.find_by_token(@item.token)
+    end
+    
+    should "work with !bang token finder method" do
+      assert Item.find_by_token!(@item.token)
+    end
+    
+    should "return nil from token finder method when record is not found" do
+      assert_equal nil, Item.find_by_token("invalid")
+    end
+    
+    should "raise activerecord not found from !bang token finder method when record is not found" do
+      assert_raises ActiveRecord::RecordNotFound do
+        Item.find_by_token!("invalid")
+      end
+    end
     
     context "when case sensitivity is disabled" do
     
@@ -104,7 +122,7 @@ class ConcernTest < MiniTest::Should::TestCase
           assert Item.find(@item.token.downcase)
         end
       end
-      
+            
     end
     
   end
