@@ -71,8 +71,14 @@ module HasTokenId
     
     module InstanceMethods
   
-      def to_param 
+      def to_param
         self.send(self.class.has_token_id_options[:param_name])
+      end
+    
+      def short_token
+        max = self.class.has_token_id_options[:length]
+        len = self.class.has_token_id_options[:short_token_length]
+        to_param[0, len < max ? len : max]
       end
     
       private      

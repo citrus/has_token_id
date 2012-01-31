@@ -47,7 +47,7 @@ class ConcernTest < MiniTest::Should::TestCase
     end
     
     should "have default options" do
-      opts = { :prefix => "I", :length => 24, :param_name => "token", :case_sensitive => false }
+      opts = { :prefix => "I", :length => 24, :short_token_length => 8, :param_name => "token", :case_sensitive => false }
       assert_equal opts, Item.has_token_id_options
     end
     
@@ -57,6 +57,17 @@ class ConcernTest < MiniTest::Should::TestCase
     
     should "have token as to_param" do
       assert_equal @item.to_param, @item.token
+    end
+    
+    should "have short token" do
+      assert_equal @item.token[0, 8], @item.short_token
+      assert_equal 8, @item.short_token.length
+    end
+    
+    should "return max token size when short token length is set longer than token length" do
+      Item.has_token_id_options.merge!(:short_token_length => 99)
+      assert_equal @item.token[0..24], @item.short_token
+      assert_equal 24, @item.short_token.length
     end
     
     should "find by token" do
