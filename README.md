@@ -10,7 +10,7 @@ Installation
 Add has_token_id to your Gemfile like so:
 
 ```ruby
-gem 'has_token_id', '~> 0.2.0' 
+gem 'has_token_id', '~> 0.3.0' 
 ```
 
 Now run `bundle install` and you're good to go!
@@ -61,6 +61,8 @@ Try it out in your `rails console`
 # Iccfa4bb1613e80097ba9495
 @item == Item.find("Iccfa4bb1613e80097ba9495")
 # true
+@item.short_token
+# Iccfa4bb
 ```
 
 
@@ -71,10 +73,11 @@ Options
 You can customize has_token_id by setting a few options. Here's the defaults:
 
 ```ruby
-:prefix         => nil, # if nil use first letter of class name 
-:length         => 24,
-:param_name     => 'token',
-:case_sensitive => false
+:prefix             => nil, # if nil use first letter of class name 
+:length             => 24,
+:short_token_length => 8,
+:param_name         => 'token',
+:case_sensitive     => false
 ```
 
 
