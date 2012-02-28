@@ -8,7 +8,27 @@ module HasTokenId
       before_validation :generate_token, :on => :create, :if => proc{|record| record.token.nil? }
     end
 
+    # Returns the resource's token
+    def to_param
+      self.send(self.class.has_token_id_options[:param_name])
+    end
+    
+    # Returns the first N digits of the resource's token
+    # N = has_token_id_options[:short_token_length]
+    def short_token
+      max = self.class.has_token_id_options[:length]
+      len = self.class.has_token_id_options[:short_token_length]
+      to_param[0, len < max ? len : max]
+    end
+    
+    private      
+      
+      def generate_token
+        self.token = self.class.generate_unique_token
+      end
+    
     module ClassMethods
+    
       attr_accessor :has_token_id_options
       
       # Default options as well as an overwrite point so you can assign different defaults to different models
@@ -61,33 +81,13 @@ module HasTokenId
         record || super(*args)
       end
       
-      private
-      
-        def token_with_table_name
-          [ table_name, has_token_id_options[:param_name] ].join(".")
-        end
-      
-    end # ClassMethods
+    private
     
-    module InstanceMethods
-  
-      def to_param
-        self.send(self.class.has_token_id_options[:param_name])
+      def token_with_table_name
+        [ table_name, has_token_id_options[:param_name] ].join(".")
       end
-    
-      def short_token
-        max = self.class.has_token_id_options[:length]
-        len = self.class.has_token_id_options[:short_token_length]
-        to_param[0, len < max ? len : max]
-      end
-    
-      private      
-        
-        def generate_token
-          self.token = self.class.generate_unique_token
-        end
-        
-    end # InstanceMethods    
+      
+    end # ClassMethods  
 
   end # Concern
   
