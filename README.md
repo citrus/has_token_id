@@ -1,4 +1,4 @@
-# has_token_id [![Build Status](https://secure.travis-ci.org/citrus/has_token_id.png)](http://travis-ci.org/citrus/has_token_id) [![Dependency Status](https://gemnasium.com/citrus/has_token_id.png)](https://gemnasium.com/citrus/has_token_id)
+# has_token_id [![Build Status](https://secure.travis-ci.org/citrus/has_token_id.png)](http://travis-ci.org/citrus/has_token_id)
 
 Identify your active records with random tokens when you don't want your users to see a sequential ID.
 
@@ -10,7 +10,7 @@ Installation
 Add has_token_id to your Gemfile like so:
 
 ```ruby
-gem 'has_token_id', '~> 0.3.1' 
+gem 'has_token_id', '~> 0.4.0'
 ```
 
 Now run `bundle install` and you're good to go!
@@ -73,7 +73,7 @@ Options
 You can customize has_token_id by setting a few options. Here's the defaults:
 
 ```ruby
-:prefix             => nil, # if nil use first letter of class name 
+:prefix             => nil, # if nil use first letter of class name
 :length             => 24,
 :short_token_length => 8,
 :param_name         => 'token',
@@ -154,4 +154,4 @@ bundle exec rake
 License
 ------------------------------------------------------------------------------
 
-Copyright (c) 2011 - 2012 Spencer Steffen and Citrus, released under the New BSD License All rights reserved.
+Copyright (c) 2011 - 2016 Spencer Steffen and Citrus, released under the New BSD License All rights reserved.
