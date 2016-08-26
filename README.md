@@ -1,4 +1,4 @@
-# has_token_id [![Build Status](https://secure.travis-ci.org/citrus/has_token_id.png)](http://travis-ci.org/citrus/has_token_id)
+# has_token_id [![Build Status](https://travis-ci.org/citrus/has_token_id.svg?branch=master)](https://travis-ci.org/citrus/has_token_id)
 
 Identify your active records with random tokens when you don't want your users to see a sequential ID.
 
