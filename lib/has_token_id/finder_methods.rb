@@ -3,16 +3,19 @@ module HasTokenId
 
     # Find by token ensuring case sensitivity
     def find_by_case_sensitive_token(token)
+      return if token.nil?
       where("#{token_with_table_name} = ?", token).first
     end
 
     # Find by token regardless of case
     def find_by_case_insensitive_token(token)
+      return if token.nil?
       where("lower(#{token_with_table_name}) = ?", token.downcase).first
     end
 
     # Find by token
     def find_by_token(token)
+      return if token.nil?
       send(has_token_id_options[:case_sensitive] ? :find_by_case_sensitive_token : :find_by_case_insensitive_token, token)
     end
 
