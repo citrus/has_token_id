@@ -9,11 +9,11 @@ module HasTokenId
 
     def has_token_id(options={})
       self.send(:include, HasTokenId::Concern)
-      @has_token_id_options = HasTokenId.default_token_options.merge(options)
+      @has_token_id_options ||= HasTokenId.default_token_options.merge(options)
     end
 
     def has_token_id_options
-      @has_token_id_options
+      @has_token_id_options ||= HasTokenId.default_token_options
     end
 
   end
