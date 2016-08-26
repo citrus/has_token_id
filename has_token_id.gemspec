@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/citrus/has_token_id"
   s.summary     = %q{Identifies your active records with a random token.}
   s.description = %q{Identifies your active records with a random token. For more information, please see the documentation.}
+  s.license     = "New BSD"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features,lib/dummy_hooks}/*`.split("\n")
@@ -22,9 +23,9 @@ Gem::Specification.new do |s|
   s.add_dependency('activesupport', '~> 3')
 
   s.add_development_dependency('rails',           '~> 3')
-  s.add_development_dependency('dummier',         '>= 0.3.0')
+  s.add_development_dependency('dummier',         '~> 0.3')
   s.add_development_dependency('minitest',        '~> 2.0')
   s.add_development_dependency('minitest_should', '~> 0.3')
-  s.add_development_dependency('sqlite3',         '>= 1.3.5')
+  s.add_development_dependency('sqlite3',         '~> 1.3')
 
 end
