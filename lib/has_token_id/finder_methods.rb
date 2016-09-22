@@ -34,6 +34,12 @@ module HasTokenId
       record || super(*args)
     end
 
+    def find!(*args)
+      record = find(*args)
+      raise ActiveRecord::RecordNotFound if record.nil?
+      record
+    end
+
   private
 
     def token_with_table_name

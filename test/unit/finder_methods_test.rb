@@ -97,4 +97,19 @@ class FinderMethodsTest < MiniTest::Should::TestCase
     end
 
   end
+
+  context "#find!" do
+
+    should "find record" do
+      assert_equal @item, Item.find!(@item.id)
+    end
+
+    should "raise active record not found when record is nil" do
+      assert_raises ActiveRecord::RecordNotFound do
+        Item.find!("test")
+      end
+    end
+
+  end
+
 end
