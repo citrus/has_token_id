@@ -5,8 +5,8 @@ module HasTokenId
       base.send(:extend,  ClassMethods)
       base.send(:include, InstanceMethods)
       base.class_eval do
-        validates :token, :presence => true, :uniqueness => true
-        before_validation :generate_token, :on => :create, :if => proc{|record| record.token.nil? }
+        validates :token, presence: true, uniqueness: true
+        before_validation :generate_token, on: :create, if: proc{|record| record.token.nil? }
       end
     end
 
@@ -14,10 +14,11 @@ module HasTokenId
 
       # Default options as well as an overwrite point so you can assign different defaults to different models
       def default_token_options
-        return @default_token_options if @default_token_options
-        @default_token_options = HasTokenId.default_token_options
-        @default_token_options[:prefix] ||= self.name[0, 1]
-        @default_token_options
+        @default_token_options ||= begin
+          options = HasTokenId.default_token_options
+          options[:prefix] ||= self.name[0, 1]
+          options
+        end
       end
 
       # Generates a unique token based on the options

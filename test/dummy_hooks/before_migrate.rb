@@ -4,7 +4,7 @@ run "rails g scaffold item name:string"
 # Add has_token_id to our Item model
 gsub_file "app/models/item.rb", "end", %(
   has_token_id
-  
+
 end)
 
 # Replace the delete link with a button since we won't have js in the demo

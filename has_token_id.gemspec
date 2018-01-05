@@ -19,12 +19,12 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency('activerecord',  '~> 3')
-  s.add_dependency('activesupport', '~> 3')
+  s.add_dependency('activerecord',  '>= 4')
+  s.add_dependency('activesupport', '>= 4')
 
-  s.add_development_dependency('rails',           '~> 3')
+  s.add_development_dependency('rails',           '>= 4')
   s.add_development_dependency('dummier',         '~> 0.3')
-  s.add_development_dependency('minitest',        '~> 2.0')
+  s.add_development_dependency('minitest',        '~> 4.2')
   s.add_development_dependency('minitest_should', '~> 0.3')
   s.add_development_dependency('sqlite3',         '~> 1.3')
 

@@ -10,7 +10,7 @@ Installation
 Add has_token_id to your Gemfile like so:
 
 ```ruby
-gem 'has_token_id', '~> 0.4.0'
+gem 'has_token_id', '~> 0.5.0'
 ```
 
 Now run `bundle install` and you're good to go!
@@ -55,7 +55,7 @@ That's basically it! Your Items will now know to use their token as their identi
 Try it out in your `rails console`
 
 ```ruby
-@item = Item.create(:name => "Tokenz!")
+@item = Item.create(name: "Tokenz!")
 #<Item id: 1, token: "Iccfa4bb1613e80097ba9495", name: "Tokenz!", created_at: "2012-01-26 20:17:13", updated_at: "2012-01-26 20:17:13">
 @item.to_param
 # Iccfa4bb1613e80097ba9495
@@ -73,11 +73,13 @@ Options
 You can customize has_token_id by setting a few options. Here's the defaults:
 
 ```ruby
-:prefix             => nil, # if nil use first letter of class name
-:length             => 24,
-:short_token_length => 8,
-:param_name         => 'token',
-:case_sensitive     => false
+{
+  prefix:             nil, # if nil use first letter of class name
+  length:             24,
+  short_token_length: 8,
+  param_name:         'token',
+  case_sensitive:     false
+}
 ```
 
 
@@ -91,8 +93,8 @@ HasTokenId.default_token_options[:prefix] = "OMG"
 
 # for multiple options
 HasTokenId.default_token_options.merge!(
-  :case_sensitive => true,
-  :length         => 8
+  case_sensitive: true,
+  length:         8
 )
 ```
 
@@ -101,11 +103,11 @@ Options can also be set on a per-class level:
 
 ```ruby
 class List < ActiveRecord::Base
-  has_token_id :prefix => "LI", :length => 10
+  has_token_id prefix: "LI", length: 10
 end
 
 class Item < ActiveRecord::Base
-  has_token_id :prefix => "ITM"
+  has_token_id prefix: "ITM"
 end
 ```
 
@@ -154,4 +156,4 @@ bundle exec rake
 License
 ------------------------------------------------------------------------------
 
-Copyright (c) 2011 - 2016 Spencer Steffen and Citrus, released under the New BSD License All rights reserved.
+Copyright (c) 2011 - 2018 Spencer Steffen and Citrus, released under the New BSD License All rights reserved.
