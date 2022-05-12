@@ -6,7 +6,7 @@ module HasTokenId
     def token(*args)
       options = { length: HasTokenId.default_token_options[:length] }.merge(args.extract_options!)
       puts "opeiont: #{options}"
-      column(:token, :string, options.merge(nil: false))
+      column(:token, :string, **options.merge(nil: false))
     end
 
   end
